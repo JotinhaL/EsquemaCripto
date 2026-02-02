@@ -27,4 +27,24 @@ def ENC(K, M):
     print("Mensagem cifrada: ", cifra)
     return cifra
 
-ENC(GEN("s"), [1, 1, 1, 1])
+
+def DEC(K, C):
+
+    # Verificação de segurança: K e C devem ter o mesmo tamanho
+    if len(K) != len(C):
+        raise ValueError("A chave e a mensagem cifrada precisam ter o mesmo tamanho! Mensagem tem que ser 4x maior que a seed.")
+    
+    # Lógica de XOR entre a chave K e a mensagem C
+    decifra = []
+    for i in range(len(K)):
+        bit_decifra = K[i] ^ C[i] # Operação XOR
+        decifra.append(bit_decifra)
+
+    print("Mensagem decifrada: ", decifra)
+    return decifra
+
+chave = GEN("seed")
+msg = [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0] 
+msg_cripto = ENC(chave, msg)
+msg_decifrada = DEC(chave, msg_cripto)
+
