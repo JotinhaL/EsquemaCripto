@@ -5,7 +5,11 @@ def GEN(seed):
     tamanho_chave = len(seed) * 4
     
     # Define a semente para o gerador ser determinístico
-    random.seed(seed)
+    seed_num = 0
+    for x in seed:
+        seed_num = 2 * seed_num + x
+        
+    random.seed(seed_num)
     
     # Gera uma lista de 0s e 1s
     chave = [random.randint(0, 1) for _ in range(tamanho_chave)]
@@ -43,8 +47,7 @@ def DEC(K, C):
     print("Mensagem decifrada: ", decifra)
     return decifra
 
-chave = GEN("seed")
+chave = GEN([0,1,0,1])
 msg = [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0] 
 msg_cripto = ENC(chave, msg)
 msg_decifrada = DEC(chave, msg_cripto)
-
